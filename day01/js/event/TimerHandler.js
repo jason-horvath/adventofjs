@@ -93,7 +93,6 @@ export default class TimerHandler extends EventBase {
     this.listen(inputSelector, 'blur', (event) => {
       let input = event.target;
       input.value = String(input.value).padStart(2, '0');
-      console.log(input.value);
       this.validateSecondsInput();
       this.setDisableInputState(true);
       this.autoStartTimer();

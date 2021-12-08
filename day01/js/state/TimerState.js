@@ -96,13 +96,9 @@ export default class TimerState {
         if(timer.minutes > 0 && timer.seconds === 0) {
           timer.minutes--;
           timer.seconds = 59;
-          console.log('middle')
         } else {
           timer.seconds--;
-          console.log('test')
         }
-        console.log(timer.minutes + ' ' + timer.seconds);
-        console.log(this.inputs);
         this.updateTimerCycle(timer);    
       }
     }, this.interval);
