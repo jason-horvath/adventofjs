@@ -1,8 +1,10 @@
 import EventBase from './EventBase.js';
-import TimerState from './state/TimerState.js';
+import TimerState from '../state/TimerState.js';
 
 export default class TimerHandler extends EventBase {
   
+  timerWasStopped = false;
+
   allowedInputKeys = [
     'Backspace',
     'ArrowLeft',
@@ -38,16 +40,28 @@ export default class TimerHandler extends EventBase {
 
   bindTimerEnded = () => {
     document.addEventListener('timer-ended', (event) => {
+      this.soundAlarm();
       this.setUiState();
     })
   }
+
+  soundAlarm = () => {
+    let alarm = new Audio('./sounds/alarm.wav');
+    alarm.play();
+  }
+
   bindStartButton = () => {
     this.listen(this.selectors.startButton, 'click', (event) => {
+      if(this.timer.timerIsZero()) {
+        return;
+      }
+
       if(this.timer.isStopped()) {
         this.timer.start();
       } else {
         this.timer.stop();
       }
+
       this.setUiState();
     })
   }
@@ -57,7 +71,9 @@ export default class TimerHandler extends EventBase {
       let parentSelector = '.' + className;
       let inputSelector = parentSelector + ' > input';
       this.listen(parentSelector, 'click', () => {
+        this.timerWasStopped = this.timer.isStopped();
         this.timer.stop();
+        this.setUiState();
         let input = this.select(inputSelector);
         input.disabled = false;
         input.focus();
@@ -78,7 +94,9 @@ export default class TimerHandler extends EventBase {
       let input = event.target;
       input.value = String(input.value).padStart(2, '0');
       console.log(input.value);
+      this.validateSecondsInput();
       this.setDisableInputState(true);
+      this.autoStartTimer();
       this.setUiState();
     });
   }
@@ -94,6 +112,18 @@ export default class TimerHandler extends EventBase {
       }
       this.setUiState();
     });
+  }
+  
+  validateSecondsInput = () => {
+    let secondsInput = this.select(this.selectors.secondsInput);
+    if(parseInt(secondsInput.value) > 59) {
+      secondsInput.value = "59";
+    }
+  }
+  autoStartTimer = () => {
+    if(!this.timerWasStopped) {
+      this.timer.start();
+    }
   }
 
   setUiState = () => {

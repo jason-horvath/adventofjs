@@ -54,6 +54,11 @@ export default class TimerState {
     }
   }
 
+  timerIsZero = () => {
+    let timer = this.getInputValues();
+    return (parseInt(timer.minutes) === 0 && parseInt(timer.seconds) === 0);
+  }
+
   setTimerValues = (timer) => {
     let updatedTimer = this.stringifyTimerValues(timer);
     this.value = {...this.value, ...updatedTimer};
@@ -109,7 +114,6 @@ export default class TimerState {
   }
 
   init = () => {
-    this.value.stopped = false;
     this.startTimerProcess();
   }
 };
