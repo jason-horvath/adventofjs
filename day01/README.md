@@ -3,7 +3,7 @@
 I wrote a few vanilla JS Modules to handle the timer state and event logic.
 
 ### Features
-- Individual input editing on click.
+- Individual input editing on click while the timer is running.
 - The timer will restart on blur of individual input edits if the timer was previously running before editing.
 - Inputs only allow numbers, backspace, left arrow, and right arrow keys.
 - Seconds input can not be over 59.
