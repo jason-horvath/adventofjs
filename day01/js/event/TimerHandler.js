@@ -52,11 +52,11 @@ export default class TimerHandler extends EventBase {
 
   bindStartButton = () => {
     this.listen(this.selectors.startButton, 'click', (event) => {
-      if(this.timer.timerIsZero()) {
+      if (this.timer.timerIsZero()) {
         return;
       }
 
-      if(this.timer.isStopped()) {
+      if (this.timer.isStopped()) {
         this.timer.start();
       } else {
         this.timer.stop();
@@ -102,7 +102,7 @@ export default class TimerHandler extends EventBase {
 
   bindSettings = () => {
     this.listen(this.selectors.settingsButton, 'click', (event) => {
-      if(this.timer.isStopped()) {
+      if (this.timer.isStopped()) {
         this.setDisableInputState(true);
         return;
       } else {
@@ -115,19 +115,19 @@ export default class TimerHandler extends EventBase {
   
   validateSecondsInput = () => {
     let secondsInput = this.select(this.selectors.secondsInput);
-    if(parseInt(secondsInput.value) > 59) {
+    if (parseInt(secondsInput.value) > 59) {
       secondsInput.value = "59";
     }
   }
   autoStartTimer = () => {
-    if(!this.timerWasStopped) {
+    if (!this.timerWasStopped) {
       this.timer.start();
     }
   }
 
   setUiState = () => {
     let startButton = this.select(this.selectors.startButton);
-    if(this.timer.isStopped()) {
+    if (this.timer.isStopped()) {
       startButton.innerHTML = 'Start';
       this.select(this.selectors.ring).classList.add('ending');
     } else {

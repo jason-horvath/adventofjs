@@ -18,7 +18,7 @@ export default class TimerState {
   interval = 1000;
 
   constructor(minutesInput, secondsInput) {
-    if(minutesInput === undefined || secondsInput === undefined) {
+    if (minutesInput === undefined || secondsInput === undefined) {
       throw Error('Make sure to pass selected input elements to TimerState class.');
     }
     this.inputs.minutes = minutesInput;
@@ -86,14 +86,14 @@ export default class TimerState {
     const inputValues = this.getInputValues();
     this.setTimerValues(inputValues);
     this.timerProcess = setInterval(() => {
-      if(this.value.stopped === false) {
+      if (this.value.stopped === false) {
         let timer = this.getTimerValues();
-        if(timer.minutes === 0 && timer.seconds === 0) {
+        if (timer.minutes === 0 && timer.seconds === 0) {
           this.value.stopped = true;
           document.dispatchEvent(this.timerEndedEvent);
           return;
         }
-        if(timer.minutes > 0 && timer.seconds === 0) {
+        if (timer.minutes > 0 && timer.seconds === 0) {
           timer.minutes--;
           timer.seconds = 59;
         } else {
