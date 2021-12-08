@@ -1,8 +1,8 @@
-### Day 01 - The Timer
+# Day 01 - The Timer
 
 This one was done with a few vanilla JS Modules.
 
-##### Features
+### Features
 - Individual input editing on click.
 - The timer will restart on blur of inputs if the timer was previously running before editing.
 - Inputs only allow numbers, backspace, left arrow, and right arrow keys.
