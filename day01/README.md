@@ -1,6 +1,6 @@
 # Day 01 - The Pomodoro Timer
 
-I wrote this one with a few vanilla JS Modules.
+I wrote a few vanilla JS Modules to handle the timer state and event logic.
 
 ### Features
 - Individual input editing on click.
