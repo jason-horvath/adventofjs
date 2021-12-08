@@ -1,4 +1,4 @@
-# Day 01 - The Timer
+# Day 01 - The Pomodoro Timer
 
 This one was done with a few vanilla JS Modules.
 
