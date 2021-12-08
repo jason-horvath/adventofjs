@@ -1,5 +1,5 @@
-import EventHandler from './TimerHandler.js';
+import TimerHandler from './TimerHandler.js';
 
 window.addEventListener('load', function() {
-  new EventHandler();
+  new TimerHandler();
 })

@@ -1,5 +1,7 @@
 const State = {
-  value: null
+  initialValue: null,
+  value: null,
+  reducers: {}
 };
 
 export default State;
