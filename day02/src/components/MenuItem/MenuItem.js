@@ -1,21 +1,20 @@
-import { useContext, useEffect } from 'react'
+import { useContext } from 'react'
 import priceString from '../../utility/priceString'
-import { CartContext } from '../../context/CartContext'
+import { productActions, ProductContext } from '../../context/ProductContext'
 import './MenuItem.css'
 
 const MenuItem = ({item}) => {
-  const { cartItems, dispatch } = {...useContext(CartContext)}
+  
+  const { cartItems, dispatchAction } = useContext(ProductContext)
   const { id, name, price, image, alt } = {...item}
 
-  useEffect(() => {
-    console.log(cartItems)
-  }, [cartItems])
   const productInCart = (id) => {
-    return Object.keys(cartItems).includes(id)
+    return Object.keys(cartItems).includes(id.toString())
+    
   }
-  const test = () => {
-    dispatch({ type: 'addProduct', payload: id})
-    console.log(cartItems)
+
+  const addToCart = (id) => {
+    dispatchAction({ type: productActions.ADD_TO_CART, payload: id})
   }
   
   return (
@@ -26,14 +25,13 @@ const MenuItem = ({item}) => {
       <div className="content">
         <p className="menu-item">{name}</p>
         <p className="price">{priceString(price)}</p>
-
         {productInCart(id) ?
           <button className="in-cart">
             <img src="images/check.svg" alt="Check" />
             In Cart
           </button>
         :
-          <button className="add" onClick={(e) => test()}>Add to Cart</button>
+          <button className="add" onClick={(e) => addToCart(id)}>Add to Cart</button>
         }
 
       </div>

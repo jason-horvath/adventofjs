@@ -1,0 +1,147 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
+
+body {
+  background: url('images/bg__left.svg') left 10% no-repeat,
+    url('images/bg__top-right.svg') right top no-repeat,
+    #EFF0F6 url('images/bg__btm-right.svg') right bottom no-repeat;
+  font-family: 'Poppins', sans-serif;
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+  min-width: 100%;
+}
+
+.wrapper {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  width: 100vw;
+  gap: 50px;
+  height: 100vh;
+}
+
+.panel {
+  background: white;
+  border-radius: 25px;
+  box-sizing: border-box;
+  box-shadow: 0px 0px 70px #C7CBE3;
+  height: 875px;
+  padding-top: 50px;
+  overflow-y: scroll;
+  width: 375px;
+}
+
+h1 {
+  padding-left: 40px;
+  font-size: 2rem;
+  font-weight: bold;
+  padding-bottom: 20px;
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.price,
+.subtotal{
+  font-size: 2rem;
+  line-height: 1;
+  font-weight: bold;
+}
+
+button {
+  background: #6B00F5;
+  border: none;
+  cursor: pointer;
+  font-family: 'Poppins', sans-serif;
+  border-radius: 20px;
+  padding: 4px 18px;
+  font-size: 1rem;
+  color: white;
+  font-weight: bold;
+  line-height: 1.2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.cart p.empty {
+  padding-left: 40px;
+}
+
+.cart .plate {
+  position: relative;
+  height: 64px;
+  width: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  grid-area: plate;
+}
+
+.cart .plate img {
+  height: 64px;
+  width: 64px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 1;
+}
+
+.cart-summary .content {
+  grid-area: content;
+}
+
+.cart .quantity {
+  background: black;
+  color: white;
+  font-size: 1rem;
+  grid-area: quantity;
+  font-weight: bold;
+  border-radius: 50%;
+  height: 32px;
+  width: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+}
+
+.quantity__wrapper {
+  display: flex;
+  gap: 10px;
+}
+
+.quantity__wrapper .quantity {
+  background: none;
+  color: black;
+}
+
+.decrease,
+.increase {
+  padding: 0;
+  height: 32px;
+  width: 32px;
+  display: block;
+}
+
+.decrease:hover,
+.increase:hover {
+  background: black;
+}
+
+.decrease img {
+  top: 1px;
+  position: relative;
+  left: -1px;
+}
+
+.increase img {
+  transform: rotate(180deg);
+  position: relative;
+  top: 1px;
+  left: 2px;
+}

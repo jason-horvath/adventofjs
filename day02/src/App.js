@@ -1,16 +1,16 @@
 import Cart from './components/Cart/Cart'
 import Menu from './components/Menu/Menu'
 import menuItems from './data/menuItems'
-import { CartProvider } from './context/CartContext'
+import { ProductProvider } from './context/ProductContext'
 import './App.css'
 
 function App() {
   return (
     <div className="wrapper menu">
-      <CartProvider>
+      <ProductProvider>
         <Menu menuItems={menuItems} />
         <Cart/>
-      </CartProvider>
+      </ProductProvider>
     </div>
   )
 }

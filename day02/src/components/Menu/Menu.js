@@ -1,8 +1,10 @@
+import { useContext } from 'react'
 import MenuItem from '../MenuItem/MenuItem'
-import './Menu.css'
+import { ProductContext } from '../../context/ProductContext'
 
-const Menu = (props) => {
-  const { menuItems } = {...props}
+const Menu = () => {
+  const { menuItems } = useContext(ProductContext)
+  
   return (
     <div className="panel">
       <h1>To Go Menu</h1>
@@ -12,7 +14,6 @@ const Menu = (props) => {
           <MenuItem key={id} item={menuItems[id]}/>
         )
       })}
-        
       </ul>
     </div>
   )
