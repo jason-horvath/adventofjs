@@ -1,15 +1,20 @@
+import { useContext, useState } from 'react'
 import CartItem from '../CartItem/CartItem'
+import { CartContext } from '../../context/CartContext'
 import './Cart.css'
 
 const Cart = () => {
-  const itemsInCart = {}
+  const { cartItems } = {...useContext(CartContext)}
+  const [items] = useState(cartItems)
   return (
     <div className="panel cart">
       <h1>Your Cart</h1>
       <p className="empty">Your cart is empty.</p>
 
       <ul className="cart-summary">
-        <CartItem />
+        {Object.keys(items).map((item, key) => {
+          return <CartItem key={key}/>
+        })}
       </ul>
 
       <div className="totals">
