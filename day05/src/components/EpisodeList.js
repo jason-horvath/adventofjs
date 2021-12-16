@@ -4,6 +4,11 @@ import Episode from './Episode.js'
 
 const EpisodeList = () => {
 
+  let shiftKey = false;
+  document.addEventListener('keydown', (e) => {
+    shiftKey = e.shiftKey
+  })
+
   const initialCheckState = () => {
     let checkState = {}
     episodes.forEach((episode) => {
@@ -12,17 +17,15 @@ const EpisodeList = () => {
     })
     return checkState
   }
+
   const [checkState, setCheckState] = useState(() => initialCheckState())
+  
   const updateChecks = (updateObject) => {
     setCheckState(prev => {
       return { ...prev, ...updateObject }
     })
   }
 
-  let shiftKey = false;
-  document.addEventListener('keydown', (e) => {
-    shiftKey = e.shiftKey
-  })
   const getHighPreviousCheck = (id) => {
     let highestChecked = 0
     Object.keys(checkState).forEach(key => {
