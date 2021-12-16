@@ -1,35 +1,59 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import episodes from '../data/episodes.js'
 import Episode from './Episode.js'
 
 const EpisodeList = () => {
-  const [episodeState, setEpisodeState] = useState({})
-  const manageChecklist = (id) => {
-    // const updateObject = Object.assign({}, episodeState)
 
-  }
-
-  useEffect(() => {
-    const updateObject = {}
+  const initialCheckState = () => {
+    let checkState = {}
     episodes.forEach((episode) => {
       const { id } = {...episode}
-      // console.log(episodeState)
-      Object.assign(updateObject, {...episodeState})
-      updateObject[id] = false;
-      // console.log(updateObject)  
-      
+      checkState[id] = false;
     })
-    
-    console.log(setEpisodeState({...updateObject}));
-    console.log(updateObject)
-    console.log(episodeState)
-  }, episodeState)
+    return checkState
+  }
+  const [checkState, setCheckState] = useState(() => initialCheckState())
+  const updateChecks = (updateObject) => {
+    setCheckState(prev => {
+      return { ...prev, ...updateObject }
+    })
+  }
 
+  let shiftKey = false;
+  document.addEventListener('keydown', (e) => {
+    shiftKey = e.shiftKey
+  })
+  const getHighPreviousCheck = (id) => {
+    let highestChecked = 0
+    Object.keys(checkState).forEach(key => {
+      if(key <= id && checkState[key] === true) {
+        highestChecked = key;
+      }
+    })
+    return highestChecked
+  }
+
+  const checkStateHandler = (e) => {
+    let id = parseInt(e.target.name.split('-')[1])
+    let checksToUpdate = {}
+    if (shiftKey) {
+      let highPreviousCheck = getHighPreviousCheck(id)
+      Object.keys(checkState).forEach(key => {
+        if(key <= id && key > highPreviousCheck && checkState[id] === false) {
+          checksToUpdate[key] = true;
+        }
+      })
+    } else {
+      checksToUpdate[id] = !checkState[id]
+    }
+    updateChecks(checksToUpdate)
+  }
+  
   return (
     <ul className="episodes">
       {episodes.map(episode => {
         const { id } = {...episode}
-        return <Episode key={id} episode={episode} onClick={(e) => manageChecklist(id)} />
+        return <Episode key={id} episode={episode} checkState={checkState} checkStateHandler={checkStateHandler} />
       })}
     </ul>
   )
