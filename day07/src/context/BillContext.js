@@ -1,4 +1,4 @@
-import { createContext, useReducer, useState} from "react"
+import { createContext, useReducer, useState} from 'react'
 
 const BillContext = createContext()
 
@@ -10,13 +10,13 @@ const billActions = {
 
 const billReducer = (state, action) => {
   switch(action.type) {
-    case UPDATE_TOTAL:
+    case billActions.UPDATE_TOTAL:
       state.total = action.payload
       break
-    case UPDATE_TIP_PERCENT:
+    case billActions.UPDATE_TIP_PERCENT:
       state.tipPercent = action.payload
       break
-    case UPDATE_PERSONS:
+    case billActions.UPDATE_PERSONS:
       state.numPersions = action.payload
       break
     default:
@@ -33,11 +33,11 @@ const BillProvider = ({ children }) => {
       numPersons: 0
     }
   })
-  const [numOfPeople, setNumOfPeople] = useState(() => 1)
-  const value = { billAmount, numOfPeople }
+  const [billState, dispatch] = useReducer(billReducer, bill)
+  const value = { bill, billState, dispatch }
   return (
     <BillContext.Provider value={value}>{children}</BillContext.Provider>
   )
 }
 
-export { BillProvider, billReducer }
+export { BillContext, BillProvider, billReducer }

@@ -18,6 +18,10 @@ const TipPercentages = () => {
 		}
 	]
   
+	const handleTip = (e) => {
+		console.log(e.target.value)
+	}
+
   return (
     <div className="tip-percentages">
       {tipData.map((tip, key) => {
@@ -33,3 +37,5 @@ const TipPercentages = () => {
     </div>
   )
 }
+
+export default TipPercentages

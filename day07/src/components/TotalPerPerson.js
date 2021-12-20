@@ -1,6 +1,7 @@
 import priceString from '../utility/priceString'
 
 const TotalPerPerson = () => {
+  const perPerson = 0
   return (
     <div className="total-per-person">
       <div className="label">Total Per Person</div>
