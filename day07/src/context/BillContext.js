@@ -1,4 +1,5 @@
 import { createContext, useReducer, useState} from 'react'
+import priceFloat from '../utility/pricePriceFloat'
 
 const BillContext = createContext()
 
@@ -11,33 +12,47 @@ const billActions = {
 const billReducer = (state, action) => {
   switch(action.type) {
     case billActions.UPDATE_TOTAL:
-      console.log(action.payload)
-      state.total = parseFloat(action.payload).toFixed(2)
+      state.total = priceFloat(action.payload)
       break
     case billActions.UPDATE_TIP_PERCENT:
-      console.log('tip')
-      state.tipPercent = parseFloat(action.payload).toFixed(2)
+      state.tipPercent = priceFloat(action.payload)
       break
     case billActions.UPDATE_PERSONS:
-      console.log('persons')
       state.numPersons = parseInt(action.payload)
       break
     default:
       break
   }
-  return state
+  return Object.assign({}, state)
 }
 
 const BillProvider = ({ children }) => {
   const [billState] = useState(() => {
      return {
-      total: 0,
-      tipPercent: 0,
+      total: 0.00,
+      tipPercent: 0.00,
       numPersons: 0
     }
   })
+
   const [bill, dispatch] = useReducer(billReducer, billState)
-  const value = { bill, dispatch }
+  
+  const getTipAmount = () => {
+    const billWithTip = (bill.total * 100) * bill.tipPercent
+    return billWithTip / 100
+  }
+
+  const getTotalPerPerson = () => {
+    const billTotal = bill.total * 100
+      if(billTotal > 0) { 
+        const tipAmount = billTotal * bill.tipPercent
+        const billPlusTip = billTotal + tipAmount
+        return (billPlusTip / 100) / bill.numPersons
+      }
+      return 0
+  }
+
+  const value = { bill, dispatch, getTipAmount, getTotalPerPerson }
   return (
     <BillContext.Provider value={value}>{children}</BillContext.Provider>
   )

@@ -1,12 +1,14 @@
 import { useContext, useEffect, useRef } from 'react'
 import { billActions, BillContext } from '../context/BillContext'
 const NumberOfPeople = () => {
-  const { bill, dispatch }= useContext(BillContext)
-  const peopleRef = useRef()
+  const { dispatch } = useContext(BillContext)
+  const peopleRef = useRef(1)
   const validateNumPeople = (e) => {
     if(e.target.value < 1 || e.target.value === 'undefined') {
       e.target.value = 1
+      return
     }
+    e.target.value = parseInt(e.target.value)
   }
 
   useEffect(() => {

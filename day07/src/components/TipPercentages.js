@@ -1,7 +1,8 @@
-import { useContext } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { billActions, BillContext } from '../context/BillContext'
 
 const TipPercentages = () => {
+	const [tipPercent, setTipPercent] = useState(0.00)
   const { dispatch } = useContext(BillContext)
   const tipData = [
 		{
@@ -22,8 +23,14 @@ const TipPercentages = () => {
 		}
 	]
   
+	useEffect(() => {
+    document.addEventListener('calculate', () => {
+      dispatch({type: billActions.UPDATE_TIP_PERCENT, payload: tipPercent})
+    })
+  }, [dispatch, tipPercent])
+
 	const handleTip = (e) => {
-		dispatch({type: billActions.UPDATE_TIP_PERCENT, payload: e.target.value})
+		setTipPercent(e.target.value)
 	}
 
   return (
@@ -31,7 +38,13 @@ const TipPercentages = () => {
       {tipData.map((tip, key) => {
         return (
           <div key={key}>
-          <input type="radio" name="tip" value={tip.percent} id={tip.id} onChange={(e) => handleTip(e)} />
+          <input
+						type="radio"
+						name="tip"
+						value={tip.percent}
+						id={tip.id}
+						onChange={(e) => handleTip(e)}
+					/>
           <label htmlFor={tip.id}>
             {tip.percent * 100}%
           </label>

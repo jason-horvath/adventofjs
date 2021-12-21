@@ -6,7 +6,7 @@ import TotalPerPerson from './components/TotalPerPerson';
 import './App.css';
 
 function App() {
-	const calculateEvent = new Event('calculate')
+	const calculateEvent = new Event('calculate', () => { console.log('test')})
 	const calculate = () => {
 		document.dispatchEvent(calculateEvent)
 	}
