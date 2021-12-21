@@ -11,13 +11,16 @@ const billActions = {
 const billReducer = (state, action) => {
   switch(action.type) {
     case billActions.UPDATE_TOTAL:
-      state.total = action.payload
+      console.log(action.payload)
+      state.total = parseFloat(action.payload).toFixed(2)
       break
     case billActions.UPDATE_TIP_PERCENT:
-      state.tipPercent = action.payload
+      console.log('tip')
+      state.tipPercent = parseFloat(action.payload).toFixed(2)
       break
     case billActions.UPDATE_PERSONS:
-      state.numPersions = action.payload
+      console.log('persons')
+      state.numPersons = parseInt(action.payload)
       break
     default:
       break
@@ -26,18 +29,18 @@ const billReducer = (state, action) => {
 }
 
 const BillProvider = ({ children }) => {
-  const [bill, setBill] = useState(() => {
+  const [billState] = useState(() => {
      return {
       total: 0,
       tipPercent: 0,
       numPersons: 0
     }
   })
-  const [billState, dispatch] = useReducer(billReducer, bill)
-  const value = { bill, billState, dispatch }
+  const [bill, dispatch] = useReducer(billReducer, billState)
+  const value = { bill, dispatch }
   return (
     <BillContext.Provider value={value}>{children}</BillContext.Provider>
   )
 }
 
-export { BillContext, BillProvider, billReducer }
+export { billActions, BillContext, BillProvider, billReducer }

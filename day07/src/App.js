@@ -6,6 +6,11 @@ import TotalPerPerson from './components/TotalPerPerson';
 import './App.css';
 
 function App() {
+	const calculateEvent = new Event('calculate')
+	const calculate = () => {
+		document.dispatchEvent(calculateEvent)
+	}
+
   return (
     <div className="wrapper">
 			<TipAmount />
@@ -18,7 +23,7 @@ function App() {
 
 			<TipPercentages/>
 			<div className="button-wrapper">
-				<button id="calculate">Calculate</button>
+				<button id="calculate" onClick={() => calculate()}>Calculate</button>
 			</div>
     </div>
   );

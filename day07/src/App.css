@@ -91,7 +91,16 @@ body {
   align-items: flex-end;
 }
 
-input[type="text"] {
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+input[type="text"], input[type="number"] {
   text-align: center;
   font-size: 3.875rem;
   font-family: 'Inter', sans-serif;
@@ -103,13 +112,13 @@ input[type="text"] {
   border-bottom: 3px dotted #B3B3B3;
 }
 
-.bill-amount input[type=text] {
+.bill-amount input[type=number] {
   background: url('./images/dollar.svg') left 15px no-repeat;
   padding-left: 40px;
   width: 100%;
 }
 
-.number-of-people input[type=text] {
+.number-of-people input[type=number] {
   background: url('./images/people.svg') left 20px no-repeat;
   padding-left: 40px;
   text-align: right;

@@ -1,4 +1,8 @@
+import { useContext } from 'react'
+import { billActions, BillContext } from '../context/BillContext'
+
 const TipPercentages = () => {
+  const { dispatch } = useContext(BillContext)
   const tipData = [
 		{
 			percent: 0.05,
@@ -19,7 +23,7 @@ const TipPercentages = () => {
 	]
   
 	const handleTip = (e) => {
-		console.log(e.target.value)
+		dispatch({type: billActions.UPDATE_TIP_PERCENT, payload: e.target.value})
 	}
 
   return (
