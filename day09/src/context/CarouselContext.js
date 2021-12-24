@@ -10,7 +10,7 @@ const carouselActions = {
 }
 
 const carouselReducer = (state, action) => {
-
+  const photosLength = Object.keys(state.photos).length
   switch(action.type) {
     case carouselActions.SELECT_PHOTO:
       state.selected = action.payload
@@ -18,11 +18,15 @@ const carouselReducer = (state, action) => {
     case carouselActions.PREVIOUS_PHOTO:
       if(state.selected > 1) {
         state.selected--
+      } else {
+        state.selected = photosLength
       }
       break
     case carouselActions.NEXT_PHOTO:
-      if(state.selected < Object.keys(state.photos).length) {
+      if(state.selected < photosLength) {
         state.selected++
+      } else {
+        state.selected = 1
       }
       break
     default:
