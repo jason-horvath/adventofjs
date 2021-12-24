@@ -16,15 +16,12 @@ const carouselReducer = (state, action) => {
       state.selected = action.payload
       break
     case carouselActions.PREVIOUS_PHOTO:
-      console.log('previous')
       if(state.selected > 1) {
         state.selected--
       }
       break
     case carouselActions.NEXT_PHOTO:
-      console.log('next')
       if(state.selected < Object.keys(state.photos).length) {
-        console.log('next cond')
         state.selected++
       }
       break
