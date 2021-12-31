@@ -39,6 +39,8 @@ button:hover {
   overflow-x: scroll;
   scroll-padding: 0 100px;
   scroll-snap-type: both mandatory;
+  overflow-y: hidden;
+  white-space: nowrap;
 }
 
 .thumbnails ul {
@@ -58,6 +60,7 @@ button:hover {
 .thumbnails li {
   scroll-snap-align: start;
   scroll-snap-stop: normal;
+  display: inline-block;
 }
 
 .thumbnails .selected {

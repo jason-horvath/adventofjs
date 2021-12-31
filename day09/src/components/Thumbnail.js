@@ -1,7 +1,8 @@
 import { useContext } from 'react'
 import { carouselActions, CarouselContext } from '../context/CarouselContext'
+import scrollTo from '../utility/scrollTo'
 
-const Thumbnail = ({ caption , id, src }) => {
+const Thumbnail = ({ caption, id, src }) => {
   const { carouselState, dispatch } = useContext(CarouselContext)
 
   const currentlySelected = (id) => {
@@ -9,8 +10,10 @@ const Thumbnail = ({ caption , id, src }) => {
   }
 
   const handleSelectPhoto = (id) => {
+    scrollTo(id)
     dispatch({type: carouselActions.SELECT_PHOTO, payload: id })
   }
+
   return (
     <li key={id} className={currentlySelected(id) ? 'selected' : ''}>
     <button onClick={() => handleSelectPhoto(id)}>

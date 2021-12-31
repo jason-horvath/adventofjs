@@ -1,10 +1,12 @@
 import { useContext } from 'react'
 import { CarouselContext } from '../context/CarouselContext'
+import scrollTo from '../utility/scrollTo'
 
 const Controls = () => {
-  const { dispatch } = useContext(CarouselContext)
+  const { carouselState, dispatch } = useContext(CarouselContext)
   const shiftPhoto = (actionType) => {
-    return dispatch({type: actionType})
+    dispatch({type: actionType})
+    scrollTo(carouselState.selected)
   }
   return (
     <>

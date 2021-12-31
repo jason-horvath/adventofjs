@@ -4,7 +4,6 @@ import { CarouselContext } from '../context/CarouselContext'
 
 const Thumbnails = () => {
   const { carouselState } = useContext(CarouselContext)
-
   return (
     <div className="thumbnails">
     <ul>
